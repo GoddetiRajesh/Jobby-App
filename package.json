@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "engines": {
-    "node": "^10.13 || 12 || 14 || 15",
+    "node": "20.0.0",
     "npm": ">=6"
   },
   "dependencies": {
@@ -14,7 +14,6 @@
     "history": "5.0.0",
     "js-cookie": "2.2.1",
     "msw": "0.28.1",
-    "node": "20.15.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-icons": "4.2.0",
