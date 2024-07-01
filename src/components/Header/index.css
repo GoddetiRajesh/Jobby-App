@@ -4,6 +4,8 @@
   justify-content: space-between;
   align-items: center;
   background-color: #272727;
+  position: sticky;
+  top: 0;
 }
 .website-logo {
   height: 50px;

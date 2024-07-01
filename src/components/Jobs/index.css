@@ -3,7 +3,6 @@
   padding: 30px 40px 30px 40px;
   display: flex;
   justify-content: center;
-  min-height: 100vh;
 }
 .card-1-container {
   width: 35%;
@@ -18,6 +17,8 @@
 .filters-container {
   width: 90%;
   margin: auto;
+  position: sticky;
+  top: 100px;
 }
 .mobile-search-container {
   display: none;

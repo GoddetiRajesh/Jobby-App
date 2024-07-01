@@ -55,6 +55,29 @@ const salaryRangesList = [
   },
 ]
 
+const locationsList = [
+  {
+    label: 'Hyderabad',
+    locationId: 'HYDERABAD',
+  },
+  {
+    label: 'Bangalore',
+    locationId: 'BANGALORE',
+  },
+  {
+    label: 'Chennai',
+    locationId: 'CHENNAI',
+  },
+  {
+    label: 'Delhi',
+    locationId: 'DELHI',
+  },
+  {
+    label: 'Mumbai',
+    locationId: 'MUMBAI',
+  },
+]
+
 class Jobs extends Component {
   state = {
     apiStatus: apiStatusConstants.initial,
@@ -62,6 +85,7 @@ class Jobs extends Component {
     searchValue: '',
     employmentTypes: [],
     salaryRange: '',
+    location: [],
   }
 
   componentDidMount() {
@@ -71,8 +95,8 @@ class Jobs extends Component {
   getjobs = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
-    const {searchValue, employmentTypes, salaryRange} = this.state
-    const url = `https://apis.ccbp.in/jobs?employment_type=${employmentTypes.join()}&minimum_package=${salaryRange}&search=${searchValue}`
+    const {searchValue, employmentTypes, salaryRange, location} = this.state
+    const url = `https://apis.ccbp.in/jobs?employment_type=${employmentTypes.join()}&location=${location.join()}&minimum_package=${salaryRange}&search=${searchValue}`
     const options = {
       method: 'GET',
       headers: {
@@ -133,6 +157,25 @@ class Jobs extends Component {
 
   updateSalaryRange = id => {
     this.setState({salaryRange: id}, this.getjobs)
+  }
+
+  updateLocation = id => {
+    const {location} = this.state
+    if (location.includes(id)) {
+      this.setState(
+        prev => ({
+          location: prev.location.filter(eachItem => eachItem !== id),
+        }),
+        this.getjobs,
+      )
+    } else {
+      this.setState(
+        prev => ({
+          location: [...prev.location, id],
+        }),
+        this.getjobs,
+      )
+    }
   }
 
   renderSuccessView = () => {
@@ -202,8 +245,10 @@ class Jobs extends Component {
               <Filters
                 employmentTypesList={employmentTypesList}
                 salaryRangesList={salaryRangesList}
+                locationsList={locationsList}
                 updateEmploymetTypes={this.updateEmploymetTypes}
                 updateSalaryRange={this.updateSalaryRange}
+                updateLocation={this.updateLocation}
               />
             </div>
           </div>
